@@ -1,0 +1,40 @@
+name: []Deploy Container Image to Azure App Service
+
+on:
+  workflow_dispatch:
+
+permissions:
+      id-token: write
+      contents: read
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory : /src
+    steps:
+    #checkout the repo
+    - name : 'Chekcout Github Action'
+      uses : actions/checkout@main
+
+    - name : 'Login via Azure CLI'
+      uses : azure/login@v1
+      with:
+        creds: ${{ secrets.MYREPO }}
+
+
+    - uses: azure/docker-login@v1
+      with:
+        login-server: 2024registry.azurecr.io
+        username: $${{ secrets.REGISTRY_USERNAME }}
+        password: $${{ secrets.REGISTRY_PASSWORD }}
+      
+    - run:
+        docker build . -t 2024registry.azurecr.io/mypythonapp_cli:latest
+        docker push 2024registry.azurecr.io/mypythonapp_cli:latest
+
+    - name : Azure Logout
+      run:
+        az logout
