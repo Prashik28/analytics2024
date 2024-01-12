@@ -1,0 +1,16 @@
+  315  az login --scope https://management.usgovcloudapi.net/user_impersonation
+  316  echo $DOCKER_DEFAULT_PLATFORM
+  317  cd Documents/GitHub/analytics
+  318  ls- ltr
+  319  ls -ltr
+  320  cd src
+  321  more Dockerfile
+  322  pwd
+  323  ls -ltr
+  324  more azure-pipelines.yml
+  325  cd src
+  326  ls -ltr
+  327  more Dockerfile
+  328  history
+  329  clear
+  330  history
